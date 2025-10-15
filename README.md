@@ -106,8 +106,3 @@ If you find this work useful, please consider to give a star and cite our paper:
       url={https://arxiv.org/abs/2510.09222}, 
 }
 ```
-
-## Licenses
-
-Copyright © 2024, NVIDIA Corporation. All rights reserved.
-
