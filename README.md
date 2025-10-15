@@ -91,6 +91,22 @@ The results will be stored in ./data/log
 - Ant environment customized by [goal_prox_il](https://github.com/clvrai/goal_prox_il) and originated from [Farama-Foundation](https://github.com/Farama-Foundation/Gymnasium)
 - Maze2D environment based on [D4RL: Datasets for Deep Data-Driven Reinforcement Learning](https://github.com/rail-berkeley/d4rl)
 
+## Results
+<h1 align="center"> 
+    <img src="./performance.png" width="1000">
+</h1>
+
+|  | Navigation (Avg Suc. Rate) |  | Manipulation (Avg Suc. Rate) |  | Locomotion (Avg Return) |  |
+|---|---|---|---|---|---|---|
+| Algorithm | (a) Ant-goal | (e) Maze2d | (b) Hand-rotate | (c) Fetch-pick | (d) Hopper | (f) Walker2d |
+| DRAIL | 0.7142 (±0.0160) | 0.7780 (±0.0373) | 0.7775 (±0.2847) | 0.7052 (±0.3538) | 3182.60 (±85.25) | 3122.69 (±764.43) |
+| GAIL | 0.6465 (±0.0542) | 0.6902 (±0.0826) | 0.9317 (±0.0541) | 0.2798 (±0.3316) | 2921.73 (±243.64) | 1698.25 (±411.42) |
+| WAIL | 0.6127 (±0.0153) | 0.2978 (±0.0785) | 0.2370 (±0.3830) | 0.0000 (±0.0000) | 2609.28 (±814.05) | 1729.20 (±984.86) |
+| VAIL | 0.7662 (±0.0365) | 0.6360 (±0.0382) | 0.5694 (±0.2960) | 0.8539 (±0.0551) | 2878.04 (±286.72) | 1156.52 (±221.67) |
+| AIRL | 0.5467 (±0.0246) | 0.8239 (±0.0241) | 0.4595 (±0.1993) | 0.0000 (±0.0000) | 7.86 (±2.91) | -5.27 (±1.18) |
+| DP | 0.8212 (±0.0135) | 0.5618 (±0.0268) | 0.9068 (±0.0136) | 0.8298 (±0.0127) | 1433.21 (±131.03) | 2204.41 (±226.28) |
+| FP | **0.8334** (±0.0222) | 0.5420 (±0.0207) | 0.9032 (±0.0188) | 0.5460 (±0.0367) | 1950.41 (±170.32) | 2384.81 (±187.98) |
+| FM-IRL (Ours) | 0.8225 (±0.0284) | **0.8731** (±0.0331) | **0.9794** (±0.0150) | **0.9984** (±0.0023) | **3358.95** (±72.31) | **4164.24** (±62.19) |
 ## Citation
 
 If you find this work useful, please consider to give a star and cite our paper:
