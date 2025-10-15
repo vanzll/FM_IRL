@@ -1,0 +1,33 @@
+project: 'FM-IRL'
+program: fmirl/main.py
+method: grid
+name: Pick-FM-BC-1.00
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --use-proper-time-limits
+parameters:
+  prefix:
+    value: fm-bc
+  alg:
+    value: fm-bc
+  env-name:
+    value: FetchPickAndPlaceDiffHoldout-v0
+  normalize-env:
+    value: False
+  traj-load-path:
+    value: ./expert_datasets/pick_10000.pt
+  bc-num-epochs:
+    value: 10000
+  eval-num-processes:
+    value: 20
+  traj-frac:
+    value: 0.5
+  traj-val-ratio:
+    value: 0.2
+  seed:
+    values: [1,2,3,4]
+
+
