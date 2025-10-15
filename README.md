@@ -33,7 +33,7 @@ This codebase requires `Python 3.8` or higher. All required packages are listed 
 
 ### Weights & Biases Setup
 
-Configure [Weights and Biases](link9) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
+Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
 
 ## Expert Demonstration Setup
 
@@ -72,32 +72,28 @@ The results will be stored in ./data/log
   - `utils/wandb.sh`: Script to automatically create and execute wandb commands from configuration files
   - `utils/setup.sh`: Script to install and set up the conda environment
 - `shape_env`: Custom environment code for reference
-- `goal_prox`: Customized environment code from [goal_prox_il](link5)
+- `goal_prox`: Customized environment code from [goal_prox_il](https://github.com/clvrai/goal_prox_il)
   - `goal_prox/envs/ant.py`: AntGoal locomotion task
   - `goal_prox/envs/fetch/custom_fetch.py`: FetchPick task
   - `goal_prox/envs/hand/manipulate.py`: HandRotate task
-- `rl-toolkit`: Base RL code and imitation learning baselines from [rl-toolkit](link6)
+- `rl-toolkit`: Base RL code and imitation learning baselines from [rl-toolkit](https://github.com/ASzot/rl-toolkit)
   - `rl-toolkit/rlf/algos/on_policy/ppo.py`: PPO policy updater code for RL
   - `rl-toolkit/rlf/algos/il/gail.py`: Baseline Generative Adversarial Imitation Learning (GAIL) code
   - `rl-toolkit/rlf/algos/il/wail.py`: Baseline Wasserstein Adversarial Imitation Learning (WAIL) code
   - `rl-toolkit/rlf/algos/il/dp.py`: Baseline Diffusion Policy code
-- `d4rl`: Codebase from [D4RL: Datasets for Deep Data-Driven Reinforcement Learning](link7) for Maze2D
+- `d4rl`: Codebase from [D4RL: Datasets for Deep Data-Driven Reinforcement Learning](https://github.com/rail-berkeley/d4rl) for Maze2D
 
 ## Acknowledgements
 
 ### Code Sources
-- Base code adapted from [goal_prox_il](link5) and [DRAIL](link1)
-- Grid world environment obtained from [maximecb](link8)
-- Fetch and Hand Rotate environments customized based on [OpenAI](link2) implementations
-- Ant environment customized by [goal_prox_il](link5) and originated from [Farama-Foundation](link3)
-- Maze2D environment based on [D4RL: Datasets for Deep Data-Driven Reinforcement Learning](link7)
-
-### Expert Dataset Sources
-- Expert demonstrations for Maze, FetchPick, HandRotate, and AntReach tasks obtained from [goal_prox_il](link5)
+- Base code adapted from [goal_prox_il](https://github.com/clvrai/goal_prox_il) and [DRAIL](https://www.bing.com/search?q=DRAIL&qs=n&form=QBRE&sp=-1&ghc=1&lq=0&pq=dra&sc=12-3&sk=&cvid=5963FB49AC6B4B4695432D9D97013E75)
+- Fetch-pick and Hand-rotate environments customized based on [OpenAI](https://github.com/openai/robogym) implementations
+- Ant environment customized by [goal_prox_il](https://github.com/clvrai/goal_prox_il) and originated from [Farama-Foundation](https://github.com/Farama-Foundation/Gymnasium)
+- Maze2D environment based on [D4RL: Datasets for Deep Data-Driven Reinforcement Learning](https://github.com/rail-berkeley/d4rl)
 
 ## Citation
 
-If you find this work useful, please consider citing our paper:
+If you find this work useful, please consider to give a star and cite our paper:
 
 ```bibtex
 @misc{wan2025fmirlflowmatchingrewardmodeling,
