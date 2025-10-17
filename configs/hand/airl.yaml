@@ -1,0 +1,54 @@
+# Copyright (c) 2024, NVIDIA CORPORATION.  All rights reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+
+project: 'FM-IRL'
+program: fmirl/main.py
+method: grid
+name: Hand-airl-1.00
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --use-proper-time-limits
+
+parameters:
+  prefix:
+    value: airl
+  alg:
+    value: airl
+  num-mini-batch:
+    value: 32
+  entropy-coef:
+    value: 0.0001
+  env-name:
+    value: CustomHandManipulateBlockRotateZ-v0
+  cuda:
+    value: True
+  traj-load-path:
+    value: ./expert_datasets/hand_10000.pt
+  eval-num-processes:
+    value: 1
+  num-render:
+    value: 1
+  num-eval:
+    value: 100
+  eval-interval:
+    value: 1000
+  save-interval:
+    value: 1000
+  lr:
+    value: 0.0001
+  num-epochs:
+    value: 5
+  noise-ratio:
+    value: 1.00
+  num-env-steps:
+    value: 3000000
+  seed:
+    values: [1,2,3,4,5]

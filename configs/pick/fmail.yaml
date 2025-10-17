@@ -1,0 +1,96 @@
+project: FM-IRL
+program: fmirl/main.py
+method: grid
+name: Pick-fmail-1.00
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --use-proper-time-limits
+parameters:
+  seed:
+    values: [1,2,3,4]
+  prefix:
+    value: fmail
+  alg:
+    value: fmail
+  cuda:
+    value: true
+  eval-num-processes:
+    value: 1
+  num-render:
+    value: 0
+  vid-fps:
+    value: 100
+  log-interval:
+    value: 1
+  save-interval:
+    value: 100000
+  eval-interval:
+    value: 200
+  clip-actions:
+    value: false
+  action-input:
+    value: true
+  entropy-coef:
+    value: 0.001
+  max-grad-norm:
+    value: 0.5
+  traj-frac:
+    value: 0.5
+  drail-state-norm:
+    value: true
+  drail-reward-norm:
+    value: true
+  reward-type:
+    value: 'airl'
+  num-steps:
+    value: 500
+  num-epochs:
+    value: 10
+  num-mini-batch:
+    value: 32
+  lr:
+    value: 0.0001
+  ppo-hidden-dim:
+    value: 256
+  disc-lr:
+    value: 0.001
+  discrim-num-unit:
+    value: 1024
+  discrim-depth:
+    value: 4
+  label-dim:
+    value: 1
+  reward-update-freq:
+    value: 1
+  fm-num-steps:
+    value: 100
+  traj-load-path:
+    value: ./expert_datasets/pick_10000.pt
+  env-name:
+    value: FetchPickAndPlaceDiffHoldout-v0
+  normalize-env:
+    value: true
+  num-eval:
+    value: 100
+  num-env-steps:
+    value: 10000000
+  traj-batch-size:
+    value: 64
+  noise-ratio:
+    value: 1.0
+  goal-noise-ratio:
+    value: 1.0
+  regirl-coef:
+    value: 1
+  regirl-num-gen:
+    value: 1024
+  regirl-num-steps:
+    value: 40
+
+name: Pick-fmail-1.00
+
+
+

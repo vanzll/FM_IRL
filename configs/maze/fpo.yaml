@@ -1,0 +1,54 @@
+project: 'FM-IRL'
+program: fmirl/main.py
+method: grid
+name: Maze-fpo-25
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  
+parameters:
+  alg:
+    value: fpo
+  clip-actions:
+    value: true
+  cuda:
+    value: true
+  env-name:
+    value: maze2d-medium-v2
+  eval-interval:
+    value: 500
+  eval-num-processes:
+    value: 1
+  log-interval:
+    value: 1
+  lr:
+    value: 0.0001
+  max-grad-norm:
+    value: 0.5
+  normalize-env:
+    value: true
+  num-env-steps:
+    value: 5000000
+  num-epochs:
+    value: 10
+  num-eval:
+    value: 2
+  num-mini-batch:
+    value: 32
+  num-render:
+    value: 1000
+  num-steps:
+    value: 256
+  ppo-hidden-dim:
+    value: 256
+  prefix:
+    value: fpo
+  save-interval:
+    value: 100000
+  seed:
+    values: [1,2,3,4]
+  vid-fps:
+    value: 100
+    
