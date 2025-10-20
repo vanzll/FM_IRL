@@ -9,7 +9,7 @@ import rlf.policies.utils as putils
 import rlf.rl.utils as rutils
 from rlf.rl.model import TwoLayerMlpWithAction, MLPBasic
 
-from drail.flow_matching import FlowMatchingModel
+from fmirl.flow_matching import FlowMatchingModel
 
 
 class FMA2CPolicy(ActorCritic):

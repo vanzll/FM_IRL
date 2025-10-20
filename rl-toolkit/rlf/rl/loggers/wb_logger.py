@@ -91,20 +91,20 @@ class WbLogger(BaseLogger):
         self.skip_create_wb = skip_create_wb
         self.enable_local_logging = enable_local_logging and SIMPLE_LOGGER_AVAILABLE
         self.local_logger_initialized = False
-        self.is_closed = False  # 初始化is_closed属性
+        self.is_closed = False  
 
     def init(self, args, mod_prefix=lambda x: x):
         super().init(args, mod_prefix)
         
-        # 初始化简单本地日志记录器
+  
         if self.enable_local_logging and not self.local_logger_initialized and SIMPLE_LOGGER_AVAILABLE:
             try:
                 log_dir = getattr(args, 'log_dir', 'data/log')
                 init_simple_local_logger(args, log_dir)
                 self.local_logger_initialized = True
-                print(f"✅ 简单本地日志记录已启用")
+          
             except Exception as e:
-                print(f"❌ 初始化简单日志记录器失败: {e}")
+          
                 self.enable_local_logging = False
         
         if self.skip_create_wb:
@@ -115,13 +115,13 @@ class WbLogger(BaseLogger):
         if self.is_closed:
             return
         
-        # 记录到本地日志
+   
         if self.enable_local_logging:
             try:
-                # 过滤出数值指标
+              
                 local_metrics = {}
                 for k, v in key_vals.items():
-                    if k[0] != '_':  # 跳过私有指标
+                    if k[0] != '_':  
                         if isinstance(v, (int, float, np.integer, np.floating)):
                             local_metrics[k] = v
                         elif isinstance(v, (torch.Tensor)) and v.numel() == 1:
@@ -133,9 +133,9 @@ class WbLogger(BaseLogger):
                 if local_metrics:
                     log_simple_metrics(local_metrics, int(step_count))
             except Exception as e:
-                print(f"本地日志记录出错: {e}")
+                pass
         
-        # 记录到wandb
+    
         if not histo:
             every_key_vals = {k: get_wb_media(v) for k, v in key_vals.items() if k[0] != '_'}
             if not self.skip_create_wb:
@@ -202,15 +202,15 @@ class WbLogger(BaseLogger):
     def close(self):
         self.is_closed = True
         
-        # 关闭本地日志记录器
+     
         if self.enable_local_logging:
             try:
                 close_simple_logger()
-                print("本地日志记录器已关闭")
+             
             except Exception as e:
-                print(f"关闭本地日志记录器时出错: {e}")
+                pass
         
-        # 关闭wandb
+      
         if not self.skip_create_wb:
             # Prefer finishing the run instead of calling save (API changed)
             try:
@@ -220,4 +220,4 @@ class WbLogger(BaseLogger):
                     # Fallback to global finish if run handle not present
                     wandb.finish()
             except Exception as e:
-                print(f"关闭W&B运行时出错: {e}")
+                pass

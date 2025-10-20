@@ -12,8 +12,8 @@ from rlf.baselines.common.running_mean_std import RunningMeanStd
 from rlf.args import str2bool
 import rlf.rl.utils as rutils
 
-from drail.drail import DRAILDiscrim
-from drail.flow_matching.flow_matching import FlowMatchingModel
+from fmirl.drail import DRAILDiscrim
+from fmirl.flow_matching.flow_matching import FlowMatchingModel
 
 
 class FMLabelCondDiscriminator(nn.Module):

@@ -4,7 +4,7 @@ from typing import Optional
 import torch
 import torch.nn as nn
 
-from drail.flow_matching import FlowMatchingModel
+from fmirl.flow_matching import FlowMatchingModel
 
 
 class _FMActionDistribution:
