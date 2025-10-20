@@ -1,7 +1,7 @@
 # FM-IRL: Flow-Matching for Reward Modeling and Policy Regularization in Reinforcement Learning
 
 <h1 align="center"> 
-    <img src="./framework_detailed.png" width="1000"><img src="./framework_overview.png" width="1000">
+    <img src="./framework_overview.png" width="1000">
 </h1>
 
 The Official implementation of [**FM-IRL: Flow-Matching for Reward Modeling and Policy Regularization in Reinforcement Learning**](https://arxiv.org/abs/2510.09222).
@@ -18,13 +18,27 @@ Bo An<sup>1</sup><br>, Ivor Tsang<sup>3</sup><br>
 (\*Equal contribution)
 
 
-This work proposes a novel framework that addresses the limitations of Flow Matching (FM) in online settings by introducing a student-teacher architecture. While FM excels at offline behavioral cloning, it struggles with exploration and online optimization due to gradient instability and high inference costs. Our approach employs a simple MLP-based student policy for efficient environment interaction and online RL updates, guided by a reward model derived from a teacher FM policy that encapsulates expert distribution knowledge. The teacher FM simultaneously regularizes the student's behavior to stabilize learning. This combination maintains the expressiveness of FM while enabling stable gradient computation and efficient exploration, significantly improving generalization and robustness, particularly with suboptimal expert data.
-
+This work proposes a novel framework that addresses the limitations of Flow Matching (FM) in online settings by introducing a student-teacher architecture. While FM excels at offline behavioral cloning, it struggles with exploration and online optimization due to gradient instability and high inference costs. Our approach employs a simple MLP-based student policy for efficient environment interaction and online RL updates, guided by a reward model derived from a teacher FM policy that encapsulates expert distribution knowledge. The teacher FM simultaneously regularizes the student's behavior to stabilize learning. This combination maintains the expressiveness of FM while enabling stable gradient computation and efficient exploration, significantly improving generalization and robustness, particularly with suboptimal expert data. The detailed workflow:
+<img src="./framework_detailed.png" width="1000">
 ## Environment Setup and Installation Guide
+
+### Fork or Clone
+[Recommended] Fork this repository to your github account and run below command in your terminal: 
+```   
+git clone [the address of forked repository]
+cd FM_IRL
+```
+
+or directly clone this repository to local:
+
+```   
+git clone https://github.com/vanzll/FM_IRL
+cd FM_IRL
+```
 
 ### Software Environment Configuration
 
-This codebase requires `Python 3.8` or higher. All required packages are listed in the `requirements.txt` file. To set up the environment from scratch using Anaconda, execute the following commands:
+This codebase requires `Python 3.8` or higher. All required packages are listed in the `requirements.txt` file. To set up the environment from scratch using conda, execute the following commands:
    ```   
    conda create -n [your_env_name] python=3.8
    conda activate [your_env_name]
@@ -37,11 +51,11 @@ Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `
 
 ## Expert Demonstration Setup
 
-Expert demonstration data is stored in the *expert_datasets* folder. Use Git LFS to access the expert demonstration files.
+Expert demonstration data is stored in the *expert_datasets* folder. We use Git LFS to store the expert demonstration files.
 
 ## Experiment Reproduction Guide
 
-To replicate the experiments conducted in our paper, follow these steps:
+To reproduce the experiments conducted in our paper, follow these steps:
 
 ### 1. Select Configuration Files
 The wandb sweep configuration files for all tasks can be found in the `configs` directory. Each subdirectory (e.g., `./configs/ant`) contains at least seven common files:
