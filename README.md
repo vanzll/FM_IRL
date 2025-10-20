@@ -6,14 +6,15 @@
 
 The Official implementation of [**FM-IRL: Flow-Matching for Reward Modeling and Policy Regularization in Reinforcement Learning**](https://arxiv.org/abs/2510.09222).
 
-Zhenglin Wan\*<sup>1</sup>,
+*Zhenglin Wan\*<sup>1</sup>,
 Jingxuan Wu\*<sup>2</sup>,
 Xingrui Yu<sup>3</sup>,
 Chubin Zhang<sup>4</sup>,
 Mingcong Lei<sup>5</sup>,
-Bo An<sup>1</sup><br>, Ivor Tsang<sup>3</sup><br>
-<sup>1</sup>Agent Mediated Lab, NTU, Singapore
-<sup>2</sup>Department of Statistics and Operations Research, UNC-Chapel Hill, America <sup>3</sup>CFAR, A*STAR, Singapore<br> <sup>4</sup>School of Computer Science, BUPT, China <br> <sup>5</sup>School of Data Science, CUHK(SZ), China
+Bo An<sup>1</sup>, Ivor Tsang<sup>3</sup><br>*
+
+<sup>1</sup>College of Computing and Data Science, NTU, Singapore
+<sup>2</sup>Department of Statistics and Operations Research, UNC-Chapel Hill, America  <sup>3</sup>Centre for Frontier AI Research, A*STAR, Singapore  <sup>4</sup>School of Computer Science, BUPT, China <sup>5</sup>School of Data Science, CUHK(SZ), China
 
 (\*Equal contribution)
 
