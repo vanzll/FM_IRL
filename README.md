@@ -46,7 +46,7 @@ This codebase requires `Python 3.8` or higher. All required packages are listed 
    ./utils/setup.sh
    ```
 
-### Weights & Biases Setup
+### Weights & Biases Setup (Optional)
 
 Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
 
@@ -74,7 +74,7 @@ After selecting the desired configuration file, execute the following command:
    ./utils/wandb.sh <Configuration_file_path.yaml>
    ```
 
-The results will be stored in ./data/log
+The results will be stored in ./data/log with the format [env_name]_[algo_name]/seed/metrics.csv
 
 
 
