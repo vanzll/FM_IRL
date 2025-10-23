@@ -96,7 +96,7 @@ If you come across the issue of mujoco, it is probably due to the compiling proc
 sudo apt-get install libglew-dev libosmesa6-dev
 conda install -c conda-forge gcc=12.1.0
 ```
-
+The mujoco version we used is 2.1.0. If you didn't install mujoco before, please follow the guide in [mujoco](https://mujoco.org/) to install mujoco and configure the environment variables.
 
 ## Code Structure Overview
 
