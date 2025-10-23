@@ -85,10 +85,9 @@ class DiffPolicy(BaseILAlgo):
         self.num_epochs += 1
 
     def first_train(self, log, eval_policy, env_interface):
-        """在训练开始前创建初始日志记录"""
-        print("🚀 Diffusion Policy训练开始，创建初始日志记录...")
+
         
-        # 记录训练开始的初始指标
+    
         initial_metrics = {
             'step': 0,
             'episode': 0,
@@ -106,13 +105,13 @@ class DiffPolicy(BaseILAlgo):
         
         # 记录到日志
         log.log_vals(initial_metrics, 0)
-        print(f"✅ DP初始日志记录已创建")
+    
         
-        # 调用父类的first_train（如果存在）
+  
         if hasattr(super(), 'first_train'):
             super().first_train(log, eval_policy, env_interface)
         
-        # 保存评估函数和其他必需的引用，供训练结束后使用
+     
         self._log = log
         self._eval_policy = eval_policy
         self._env_interface = env_interface
@@ -121,8 +120,8 @@ class DiffPolicy(BaseILAlgo):
         action_loss = []
         prev_num = 0
 
-        # Diffusion Policy训练循环
-        print(f"🎯 开始Diffusion Policy训练 ({self.args.bc_num_epochs} epochs)")
+    
+        print(f"🎯 Diffusion Policy training ({self.args.bc_num_epochs} epochs)")
         with tqdm(total=self.args.bc_num_epochs) as pbar:
             while self.num_epochs < self.args.bc_num_epochs:
                 super().pre_update(self.num_bc_updates)
@@ -142,40 +141,36 @@ class DiffPolicy(BaseILAlgo):
         )
         
         # 训练结束后进行性能评估
-        print("📊 Diffusion Policy训练完成，开始性能评估...")
+        print("📊 Diffusion Policy training completed, starting performance evaluation...")
         self._post_training_evaluation()
         self._plot_circle_predictions()
         
         self.num_epochs = 0
 
     def _post_training_evaluation(self):
-        """在训练结束后进行性能评估并记录结果"""
         if not hasattr(self, '_eval_policy') or not hasattr(self, '_log'):
-            print("⚠️  评估函数不可用，跳过性能评估")
+            print("⚠️  Evaluation function not available, skipping performance evaluation")
             return
             
         try:
-            # 创建评估参数
             import copy
             eval_args = copy.copy(self.args)
             eval_args.eval_num_processes = min(20, getattr(self.args, 'eval_num_processes', 10))
             eval_args.num_eval = getattr(self.args, 'num_eval', 100)
             eval_args.num_render = 0
             
-            print(f"🔍 使用{eval_args.num_eval}个episodes评估策略性能...")
+            print(f"🔍 Using {eval_args.num_eval} episodes to evaluate policy performance...")
             
             # 运行评估
             tmp_env = self._eval_policy(self.policy, self.num_bc_updates, True, eval_args)
             
-            # 关闭临时环境
             if tmp_env is not None:
                 tmp_env.close()
             
-            print("✅ Diffusion Policy性能评估完成")
+            print("✅ Diffusion Policy performance evaluation completed")
             
         except Exception as e:
-            print(f"⚠️  DP性能评估失败: {e}")
-            # 即使评估失败，也记录一个最终的训练完成指标
+            print(f"⚠️  DP performance evaluation failed: {e}")
             final_metrics = {
                 'step': self.num_bc_updates,
                 'episode': 0,
@@ -188,9 +183,9 @@ class DiffPolicy(BaseILAlgo):
             
             try:
                 self._log.log_vals(final_metrics, self.num_bc_updates)
-                print("📝 已记录DP训练完成状态")
+                print("📝 DP training completed status recorded")
             except:
-                print("⚠️  无法记录最终状态")
+                print("⚠️  Unable to record final state")
 
     def pre_update(self, cur_update):
         # Override the learning rate decay
@@ -213,14 +208,12 @@ class DiffPolicy(BaseILAlgo):
         self._standard_step(pred_loss) #backward
         self.num_bc_updates += 1
 
-        # 添加标准日志指标
         log_dict["_pr_predict_loss"] = pred_loss.item()
-        log_dict["predict_loss"] = pred_loss.item()  # 标准预测损失指标
-        log_dict["diffusion_loss"] = pred_loss.item()  # 扩散损失指标
+        log_dict["predict_loss"] = pred_loss.item() 
+        log_dict["diffusion_loss"] = pred_loss.item() 
         
-        # 添加训练进度相关的标准指标
         log_dict["step"] = self.num_bc_updates
-        log_dict["episode"] = 0  # DP没有episode概念，设为0
+        log_dict["episode"] = 0  
         log_dict["epoch"] = self.num_epochs
         log_dict["training_progress"] = self.num_epochs / max(1, self.args.bc_num_epochs)
         log_dict["timestamp"] = time.time()

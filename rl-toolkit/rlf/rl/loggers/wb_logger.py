@@ -17,7 +17,7 @@ from rlf.rl.loggers.base_logger import BaseLogger
 from six.moves import shlex_quote
 import matplotlib.pyplot as plt
 
-# 导入简单本地日志记录器
+
 try:
     sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
     from utils.simple_local_logger import init_simple_local_logger, log_simple_metrics, close_simple_logger

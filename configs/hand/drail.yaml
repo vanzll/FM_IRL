@@ -6,8 +6,8 @@
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
-project: 'FM-AIL'
-program: drail/main.py
+project: 'FM-IRL'
+program: fmirl/main.py
 method: grid
 name: Hand-drail-1.00
 command:

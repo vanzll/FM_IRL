@@ -1,7 +1,7 @@
-project: 'FM-AIL'
-program: drail/main.py
+project: 'FM-IRL'
+program: fmirl/main.py
 method: grid
-name: Hand-FM-BC-1.00
+name: Hand-fm-policy-1.00
 command:
   - ${env}
   - python3

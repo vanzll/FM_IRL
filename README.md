@@ -41,11 +41,12 @@ cd FM_IRL
 
 This codebase requires `Python 3.8` or higher. All required packages are listed in the `requirements.txt` file. To set up the environment from scratch using conda, execute the following commands:
    ```   
-   conda create -n [your_env_name] python=3.8
-   conda activate [your_env_name]
+   conda create -n fmirl python=3.8
+   conda activate fmirl
    ./utils/setup.sh
    ```
 
+Please be noted that we use CUDA 11.7 to conduct our experiment, and you may need to run ```nvidia-smi``` to check if the CUDA version on the upper-right corner is greater than OR equal to 11.7, and install CUDA on your PC.
 ### Weights & Biases Setup
 
 Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
@@ -73,6 +74,8 @@ After selecting the desired configuration file, execute the following command:
    ```
    ./utils/wandb.sh <Configuration_file_path.yaml>
    ```
+- Example: ```./utils/wandb.sh ./configs/ant/fmirl.yaml```
+
 
 The results will be stored in ./data/log
 

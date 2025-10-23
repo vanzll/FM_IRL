@@ -1,7 +1,7 @@
-project: FMAIL
-program: drail/main.py
+project: FM-IRL
+program: fmirl/main.py
 method: grid
-name: Hand-fmail-1.00
+name: Hand-fmirl-1.00
 command:
   - ${env}
   - python3
@@ -10,7 +10,7 @@ command:
   - --use-proper-time-limits
 parameters:
   seed:
-    values: [5]
+    values: [1,2,3,4]
   prefix:
     value: fmail
   alg:
