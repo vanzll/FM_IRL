@@ -12,7 +12,7 @@ parameters:
   seed:
     values: [1,2,3,4]
   prefix:
-    value: fmail
+    value: fmirl
   alg:
     value: fmail
   cuda:

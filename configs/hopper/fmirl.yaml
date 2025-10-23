@@ -21,7 +21,7 @@ parameters:
     values: [1, 2, 3, 4]
     # value: 1
   prefix:
-    value: "fmail"
+    value: "fmirl"
   alg:
     value: "fmail"
   traj-load-path:
