@@ -31,7 +31,7 @@ git lfs install
 ```
 to initialize Git LFS first before cloning the repository.
 
-*Alternative approach*: you can also manually download expert_demonstrations in addition to cloning the repository.
+*Alternative approach*: you can also manually download expert_datasets in addition to cloning the repository, and replace the expert_datasets folder.
 
 ### Fork or Clone
 [Recommended] Fork this repository to your github account and run below command in your terminal: 
@@ -89,11 +89,12 @@ After selecting the desired configuration file, execute the following command:
 
 The results will be stored in ./data/log with the format [env_name]_[algo_name]/seed/metrics.csv
 
-### 3. Glitchs
-If you come across the issue of mujoco version, it could probably be solved by:
+### 3. Glitch
+If you come across the issue of mujoco, it is probably due to the compiling process of mujoco requires GCC and GLEW:
 
 ```
 sudo apt-get install libglew-dev libosmesa6-dev
+conda install -c conda-forge gcc=12.1.0
 ```
 
 
