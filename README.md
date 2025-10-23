@@ -31,7 +31,7 @@ git lfs install
 ```
 to initialize Git LFS first before cloning the repository.
 
-*Alternative approach*: you can also manually download expert_datasets in addition to cloning the repository, and replace the expert_datasets folder.
+*Alternative approach*: you can also manually download each single file in /expert_datasets in addition to cloning the repository, and replace the expert_datasets folder (Note: downloading the whole repository in a .zip file doens't work, you need to enter the github page of each single demonstration file and manually download it).
 
 ### Fork or Clone
 [Recommended] Fork this repository to your github account and run below command in your terminal: 
