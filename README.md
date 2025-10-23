@@ -31,6 +31,7 @@ git lfs install
 ```
 to initialize Git LFS first before cloning the repository.
 
+*Alternative approach*: you can also manually download expert_demonstrations in addition to cloning the repository.
 
 ### Fork or Clone
 [Recommended] Fork this repository to your github account and run below command in your terminal: 
