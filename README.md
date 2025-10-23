@@ -46,8 +46,12 @@ This codebase requires `Python 3.8` or higher. All required packages are listed 
    ./utils/setup.sh
    ```
 
+<<<<<<< HEAD
 Please be noted that we use CUDA 11.7 to conduct our experiment, and you may need to run ```nvidia-smi``` to check if the CUDA version on the upper-right corner is greater than OR equal to 11.7, and install CUDA on your PC.
 ### Weights & Biases Setup
+=======
+### Weights & Biases Setup (Optional)
+>>>>>>> 6b1f96092583098fe721e4f5129eaccfccd21ddd
 
 Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
 
@@ -77,7 +81,7 @@ After selecting the desired configuration file, execute the following command:
 - Example: ```./utils/wandb.sh ./configs/ant/fmirl.yaml```
 
 
-The results will be stored in ./data/log
+The results will be stored in ./data/log with the format [env_name]_[algo_name]/seed/metrics.csv
 
 
 
