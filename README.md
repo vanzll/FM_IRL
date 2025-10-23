@@ -22,6 +22,15 @@ Bo An<sup>1</sup>, Ivor Tsang<sup>3</sup><br>*
 This work proposes a novel framework that addresses the limitations of Flow Matching (FM) in online settings by introducing a student-teacher architecture. While FM excels at offline behavioral cloning, it struggles with exploration and online optimization due to gradient instability and high inference costs. Our approach employs a simple MLP-based student policy for efficient environment interaction and online RL updates, guided by a reward model derived from a teacher FM policy that encapsulates expert distribution knowledge. The teacher FM simultaneously regularizes the student's behavior to stabilize learning. This combination maintains the expressiveness of FM while enabling stable gradient computation and efficient exploration, significantly improving generalization and robustness, particularly with suboptimal expert data. The detailed workflow:
 <img src="./framework_detailed.png" width="1000">
 ## Environment Setup and Installation Guide
+### Preparation
+In this repository, we use Git LFS to manage the large files (i.e. the expert demonstration). If you didn't install Git LFS before, run:
+```
+sudo apt-get update
+sudo apt-get install git-lfs
+git lfs install
+```
+to initialize Git LFS first before cloning the repository.
+
 
 ### Fork or Clone
 [Recommended] Fork this repository to your github account and run below command in your terminal: 
@@ -36,7 +45,7 @@ or directly clone this repository to local:
 git clone https://github.com/vanzll/FM_IRL
 cd FM_IRL
 ```
-
+Please be noted that we use CUDA 11.7 to conduct our experiment, and you may need to run ```nvidia-smi``` to check if the CUDA version on the upper-right corner is greater than OR equal to 11.7, and install the correct version of CUDA on your PC.
 ### Software Environment Configuration
 
 This codebase requires `Python 3.8` or higher. All required packages are listed in the `requirements.txt` file. To set up the environment from scratch using conda, execute the following commands:
@@ -46,7 +55,7 @@ This codebase requires `Python 3.8` or higher. All required packages are listed 
    ./utils/setup.sh
    ```
 
-Please be noted that we use CUDA 11.7 to conduct our experiment, and you may need to run ```nvidia-smi``` to check if the CUDA version on the upper-right corner is greater than OR equal to 11.7, and install CUDA on your PC.
+
 ### Weights & Biases Setup
 
 Configure [Weights and Biases](https://wandb.ai/site) by first logging in with `wandb login <YOUR_API_KEY>` and then editing `config.yaml` with your W&B username and project name.
@@ -79,7 +88,12 @@ After selecting the desired configuration file, execute the following command:
 
 The results will be stored in ./data/log with the format [env_name]_[algo_name]/seed/metrics.csv
 
+### 3. Glitchs
+If you come across the issue of mujoco version, it could probably be solved by:
 
+```
+sudo apt-get install libglew-dev libosmesa6-dev
+```
 
 
 ## Code Structure Overview
