@@ -14,7 +14,7 @@ from functools import partial
 
 from rlf import run_policy
 from rlf.algos import (GAIL, PPO, BaseAlgo, BehavioralCloning, DiffPolicy, 
-                       BehavioralCloningFromObs, WAIL, PWIL, GIRIL, AIRL)
+                       BehavioralCloningFromObs, WAIL, PWIL, GIRIL, AIRL, VAIL)
 from rlf.algos.il.base_il import BaseILAlgo
 from rlf.algos.il.gaifo import GAIFO
 from rlf.algos.il.sqil import SQIL
@@ -45,19 +45,20 @@ from goal_prox.models import GwImgEncoder
 from goal_prox.policies.grid_world_expert import GridWorldExpert
 
 
-from drail.drail_un import DRAIL_UN
-from drail.drail import DRAIL
-from drail.fm_ail import FMAIL, Decoupled_FMAIL
-from drail.get_policy import get_ppo_policy, get_basic_policy, get_diffusion_policy, get_deep_ddpg_policy, get_deep_sac_policy, get_deep_iqlearn_policy, get_deep_basic_policy
-from drail.get_policy import get_fmppo_policy, get_fm_a2c_policy
-from drail.fm_a2c import FMA2C
-from drail.get_policy import get_flow_matching_policy
-from drail.fpo_algo import FPOAlgo
+from fmirl.drail_un import DRAIL_UN
+from fmirl.drail import DRAIL
+from fmirl.fm_ail import FMAIL, Decoupled_FMAIL
+from fmirl.get_policy import get_ppo_policy, get_basic_policy, get_diffusion_policy, get_deep_ddpg_policy, get_deep_sac_policy, get_deep_iqlearn_policy, get_deep_basic_policy
+from fmirl.get_policy import get_fmppo_policy, get_fm_a2c_policy
+from fmirl.fm_a2c import FMA2C
+from fmirl.get_policy import get_flow_matching_policy
+from fmirl.fpo_algo import FPOAlgo
 
 
 def get_setup_dict():
     return {
         "gail": (GAIL(), get_ppo_policy),
+        "vail": (VAIL(), get_ppo_policy),
         "wail": (WAIL(), get_ppo_policy),
         "pwil": (PWIL(), get_ppo_policy),
         "uncert-gail": (UncertGAIL(), get_ppo_policy),

@@ -13,7 +13,8 @@ parameters:
     values: [1,2,3,4]
   prefix:
     value: fmail
-
+  experiment-name:
+    value: Ant-fmirl-0.00
   ant-noise:
     value: 0.0
   alg:

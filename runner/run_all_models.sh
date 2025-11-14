@@ -23,7 +23,7 @@ GPU_IDS=""
 
 # 模型列表
 # 新增 FM-BC 与 FMAIL
-MODELS=("drail" "drail-un" "fm-drail" "fmail" "decoupled-fmail" "fmail_reg1" "gail" "gailGP" "wail" "bc" "diffusion-policy" "fm-bc" "airl" "giril" "pwil")
+MODELS=("drail" "drail-un" "fm-drail" "fmail" "decoupled-fmail" "fmail_reg1" "gail" "vail" "gailGP" "wail" "bc" "diffusion-policy" "fm-bc" "airl" "giril" "pwil")
 
 # 显示使用方法
 show_usage() {
@@ -39,7 +39,7 @@ show_usage() {
     echo "  pick <noise_level>     - FetchPick环境，噪声级别 (1.00, 1.25, 1.50, 1.75, 2.00)"
     echo "  push <noise_level> [expert_transitions] - FetchPush环境，噪声级别和专家转换数"
     echo "  hand <noise_level>     - HandRotate环境，噪声级别 (1.00, 1.25, 1.50, 1.75, 2.00)"
-    echo "  ant <noise_level>      - AntGoal环境，噪声级别 (0.00, 0.01, 0.03, 0.05)"
+    echo "  ant <noise_level>      - AntGoal环境，噪声级别 (从目录动态检测)"
     echo "  maze <coverage>        - Maze环境，专家覆盖率 (25, 50, 75, 100)"
     echo "  walker <trajectories>  - Walker环境，轨迹数量 (1traj, 2traj, 3traj, 5traj)"
     echo "  halfcheetah <trajectories>  - HalfCheetah环境，轨迹数量 (1traj, 2traj, 3traj, 5traj)"
@@ -154,7 +154,16 @@ get_param_description() {
 get_available_params() {
     case "$ENV_NAME" in
         "pick"|"hand")
-            echo "1.00 1.25 1.50 1.75 2.00"
+            if [ -d "$CONFIGS_DIR" ]; then
+                local opts=()
+                for d in $(ls "$CONFIGS_DIR" | sort -V); do
+                    if [ -d "$CONFIGS_DIR/$d" ] && [ "$d" != "expert" ]; then
+                        opts+=("$d")
+                    fi
+                done
+                printf '%s ' "${opts[@]}"
+                echo ""
+            fi
             ;;
         "push")
             if [ -n "$PARAM_VALUE" ] && [ -d "$CONFIGS_DIR/$PARAM_VALUE" ]; then
@@ -174,7 +183,16 @@ get_available_params() {
             fi
             ;;
         "ant")
-            echo "0.00 0.01 0.03 0.05"
+            if [ -d "$CONFIGS_DIR" ]; then
+                local opts=()
+                for d in $(ls "$CONFIGS_DIR" | sort -V); do
+                    if [ -d "$CONFIGS_DIR/$d" ] && [ "$d" != "expert" ]; then
+                        opts+=("$d")
+                    fi
+                done
+                printf '%s ' "${opts[@]}"
+                echo ""
+            fi
             ;;
         "maze")
             echo "25 50 75 100"
@@ -260,12 +278,32 @@ start_model() {
     local param_config=$2
     local model=$3
     
+    # 允许模型名与实际yaml文件名不同的映射（并支持候选名依次尝试）
+    local yaml_candidates=("$model")
+    case "$model" in
+        "fmail")
+            yaml_candidates=("fmail" "fmirl")
+            ;;
+        "fmirl")
+            yaml_candidates=("fmirl" "fmail")
+            ;;
+        "fm-bc")
+            yaml_candidates=("fm_policy" "fm-bc")
+            ;;
+    esac
+    
     local config_path
-    if [ -z "$param_config" ] || [ "$param_config" = "." ]; then
-        config_path="$CONFIGS_DIR/${model}.yaml"
-    else
-        config_path="$CONFIGS_DIR/${param_config}/${model}.yaml"
-    fi
+    # 依次尝试候选文件名，找到第一个存在的
+    for cand in "${yaml_candidates[@]}"; do
+        if [ -z "$param_config" ] || [ "$param_config" = "." ]; then
+            config_path="$CONFIGS_DIR/${cand}.yaml"
+        else
+            config_path="$CONFIGS_DIR/${param_config}/${cand}.yaml"
+        fi
+        if [ -f "$config_path" ]; then
+            break
+        fi
+    done
     
     # 检查配置文件是否存在
     if [ ! -f "$config_path" ]; then

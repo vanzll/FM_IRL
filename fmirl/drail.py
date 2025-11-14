@@ -31,7 +31,7 @@ try:
     import wandb
 except:
     pass
-from drail.ddpm import MLPConditionDiffusion
+from fmirl.ddpm import MLPConditionDiffusion
 
 def cosine_beta_schedule(timesteps, s=0.008):
     """

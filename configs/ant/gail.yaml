@@ -25,6 +25,8 @@ parameters:
     value: gail
   env-name:
     value: AntGoal-v0
+  experiment-name:
+    value: Ant-gail-0.00
   traj-load-path:
     value: ./expert_datasets/ant_50.pt
   cuda:

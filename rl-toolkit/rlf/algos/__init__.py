@@ -19,3 +19,4 @@ from rlf.algos.nested_algo import NestedAlgo
 from rlf.algos.il.base_irl import BaseIRLAlgo
 from rlf.algos.il.giril import GIRIL
 from rlf.algos.il.airl import AIRL
+from rlf.algos.il.vail import VAIL

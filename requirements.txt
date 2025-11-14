@@ -25,6 +25,7 @@ conda-flow==0.3.3
 configparser==4.0.2
 cycler==0.10.0
 Cython==0.29.35
+-e git+https://github.com/vanzll/FM_IRL@439957c40f00e8f05dbb07cc45d0233e0f63f727#egg=d4rl&subdirectory=d4rl
 dcargs==0.1.10
 decorator==4.4.1
 dm-control==1.0.12
@@ -132,6 +133,7 @@ ray==0.8.6
 redis==3.4.1
 requests==2.32.4
 requests-oauthlib==1.3.1
+-e git+https://github.com/vanzll/FM_IRL@439957c40f00e8f05dbb07cc45d0233e0f63f727#egg=rl_toolkit&subdirectory=rl-toolkit
 rsa==4.9
 Rx==1.6.1
 scikit-image==0.18.3

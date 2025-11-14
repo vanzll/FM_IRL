@@ -8,16 +8,16 @@
 
 from functools import partial
 import torch.nn as nn
-import drail.ddpm.policy_model as policy_model
+import fmirl.ddpm.policy_model as policy_model
 from rlf.policies import BasicPolicy, DistActorCritic
 from rlf.policies.actor_critic.dist_actor_q import (DistActorQ, get_sac_actor,
                                                     get_sac_critic)
 from rlf.policies.actor_critic.reg_actor_critic import RegActorCritic
 from rlf.rl.model import MLPBase, MLPBasic, TwoLayerMlpWithAction
 from goal_prox.models import GwImgEncoder
-from drail.flow_matching import MLPFlowPolicy
-from drail.fm_ppo import FMActionDistHead
-from drail.fm_a2c import FMA2CPolicy
+from fmirl.flow_matching import MLPFlowPolicy
+from fmirl.fm_ppo import FMActionDistHead
+from fmirl.fm_a2c import FMA2CPolicy
 
 
 def get_ppo_policy(env_name, args):

@@ -1,0 +1,60 @@
+# Copyright (c) 2024, NVIDIA CORPORATION.  All rights reserved.
+#
+# NVIDIA CORPORATION and its licensors retain all intellectual property
+# and proprietary rights in and to this software, related documentation
+# and any modifications thereto.  Any use, reproduction, disclosure or
+# distribution of this software and related documentation without an express
+# license agreement from NVIDIA CORPORATION is strictly prohibited.
+
+project: 'FM-IRL-pick-noise'
+program: fmirl/main.py
+method: grid
+name: Pick-airl-2.00
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --use-proper-time-limits
+
+parameters:
+  prefix:
+    value: airl
+  alg:
+    value: airl
+  experiment-name:
+    value: airl-2.00
+  group-name:
+    value: noise-2.00
+  num-mini-batch:
+    value: 32
+  entropy-coef:
+    value: 0.0001
+  env-name:
+    value: FetchPickAndPlaceDiffHoldout-v0
+  num-env-steps:
+    value: 10000000
+  cuda:
+    value: False
+  traj-load-path:
+    value: ./expert_datasets/pick_10000.pt
+  eval-num-processes:
+    value: 1
+  num-render:
+    value: 1
+  num-eval:
+    value: 100
+  eval-interval:
+    value: 1000
+  save-interval:
+    value: 1000
+  lr:
+    value: 0.00005
+  num-epochs:
+    value: 10
+  noise-ratio:
+    value: 2.00
+  goal-noise-ratio:
+    value: 2.00
+  seed:
+    values: [1,2,3,4]

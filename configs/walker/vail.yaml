@@ -1,0 +1,77 @@
+project: 'FM-IRL'
+program: fmirl/main.py
+method: grid
+name: Walker-vail-1traj
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+
+parameters:
+  seed:
+    values: [1, 2, 3, 4]
+  prefix:
+    value: "vail"
+  alg:
+    value: "vail"
+  traj-load-path:
+    value: ./expert_datasets/ppo_walker_1.pt
+  env-name:
+    value: "Walker2d-v3"
+  normalize-env:
+    value: True
+  cuda:
+    value: True
+  eval-num-processes:
+    value: 1
+  num-render:
+    value: 1000
+  num-eval:
+    value: 2
+  vid-fps:
+    value: 100
+  log-interval:
+    value: 1
+  save-interval:
+    value: 100000
+  eval-interval:
+    value: 20000
+  clip-actions:
+    value: True
+  traj-batch-size:
+    value: 128
+  max-grad-norm:
+    value: 0.5
+  num-env-steps:
+    value: 8000000
+  traj-frac:
+    value: 1
+  action-input:
+    value: False
+  entropy-coef:
+    value: 0.001
+
+  num-steps:
+    value: 128
+  num-epochs:
+    value: 10
+  num-mini-batch:
+    value: 32
+  gail-state-norm:
+    value: True
+  gail-reward-norm:
+    value: True
+  lr:
+    value: 0.0001
+  disc-lr:
+    value: 0.0000005
+  reward-type:
+    value: "airl-positive"
+  ppo-hidden-dim:
+    value: 256
+
+  # VAIL-specific
+  vail-kl-coef:
+    value: 0.001
+

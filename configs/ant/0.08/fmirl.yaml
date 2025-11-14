@@ -1,0 +1,96 @@
+project: FM-IRL
+program: fmirl/main.py
+method: grid
+name: Ant-fmail-0.08
+command:
+  - ${env}
+  - python3
+  - ${program}
+  - ${args}
+  - --use-proper-time-limits
+parameters:
+  seed:
+    values: [1,2,3,4]
+  prefix:
+    value: fmail
+  experiment-name:
+    value: Ant-fmirl-0.08
+  ant-noise:
+    value: 0.08
+  alg:
+    value: fmail
+  cuda:
+    value: true
+  eval-num-processes:
+    value: 1
+  num-render:
+    value: 0
+  vid-fps:
+    value: 100
+  log-interval:
+    value: 1
+  save-interval:
+    value: 100000
+  eval-interval:
+    value: 200
+  clip-actions:
+    value: false
+  action-input:
+    value: true
+  entropy-coef:
+    value: 0.001
+  max-grad-norm:
+    value: 0.5
+  traj-frac:
+    value: 0.5
+  drail-state-norm:
+    value: true
+  drail-reward-norm:
+    value: true
+  reward-type:
+    value: 'airl'
+  num-steps:
+    value: 500
+  num-epochs:
+    value: 10
+  num-mini-batch:
+    value: 32
+  lr:
+    value: 0.0001
+  ppo-hidden-dim:
+    value: 256
+  disc-lr:
+    value: 0.001
+  discrim-num-unit:
+    value: 1024
+  discrim-depth:
+    value: 4
+  label-dim:
+    value: 1
+  reward-update-freq:
+    value: 1
+  fm-num-steps:
+    value: 100
+  traj-load-path:
+    value: ./expert_datasets/ant_50.pt
+  env-name:
+    value: AntGoal-v0
+  normalize-env:
+    value: true
+  num-eval:
+    value: 50
+  num-env-steps:
+    value: 5000000
+  traj-batch-size:
+    value: 64
+  regirl-coef:
+    value: 1
+  regirl-num-gen:
+    value: 1024
+  regirl-num-steps:
+    value: 40
+
+
+  
+name: Ant-fmail-0.08
+

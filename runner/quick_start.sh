@@ -20,10 +20,10 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # 支持的环境配置
 declare -A ENV_CONFIGS=(
-    ["pick"]="FetchPick 噪声级别:1.00,1.25,1.50,1.75,2.00"
+    ["pick"]="FetchPick 噪声级别:自动检测"
     ["push"]="FetchPush 噪声级别和专家转换数:1.00,1.25,1.50,1.75,2.00"
     ["hand"]="HandRotate 噪声级别:1.00,1.25,1.50,1.75,2.00"
-    ["ant"]="AntGoal 噪声级别:0.00,0.01,0.03,0.05"
+    ["ant"]="AntGoal 噪声级别:自动检测"
     ["maze"]="Maze 专家覆盖率:25,50,75,100"
     ["walker"]="Walker 轨迹数量:1traj,2traj,3traj,5traj"
     ["halfcheetah"]="HalfCheetah 轨迹数量:1traj,2traj,3traj,5traj"
@@ -33,7 +33,7 @@ declare -A ENV_CONFIGS=(
 )
 
 # 支持的模型列表
-AVAILABLE_MODELS=("drail" "drail-un" "fm-drail" "fmail" "decoupled-fmail" "fmail_reg1" "gail" "gailGP" "wail" "bc" "diffusion-policy" "fm-bc" "airl" "giril" "pwil")
+AVAILABLE_MODELS=("drail" "drail-un" "fm-drail" "fmail" "decoupled-fmail" "fmail_reg1" "gail" "vail" "gailGP" "wail" "bc" "diffusion-policy" "fm-bc" "airl" "giril" "pwil")
 
 # 显示标题
 show_header() {
@@ -187,6 +187,9 @@ show_model_menu() {
             "fmail")
                 display_name="FMAIL (Flow Matching AIL)"
                 ;;
+            "vail")
+                display_name="VAIL (Variational Adversarial Imitation Learning)"
+                ;;
             "decoupled-fmail")
                 display_name="Decoupled FMAIL"
                 ;;
@@ -329,7 +332,7 @@ start_training() {
     show_model_menu
     
     echo ""
-    read -p "请选择模型 (0-${#AVAILABLE_MODELS[@]}, a, m): " model_choice
+    read -p "请选择模型 (0-${#AVAILABLE_MODELS[@]}, a, m，或用空格分隔的编号如: 1 4 7): " model_choice
     
     if [ "$model_choice" = "0" ]; then
         start_training  # 递归回到环境选择
@@ -352,13 +355,32 @@ start_training() {
             selected_models=("${SELECTED_MODELS[@]}")
             ;;
         *)
-            # 单个模型
-            if [ "$model_choice" -ge 1 ] && [ "$model_choice" -le "${#AVAILABLE_MODELS[@]}" ]; then
-                selected_models=("${AVAILABLE_MODELS[$((model_choice-1))]}")
+            # 支持空格分隔的多个编号或单个编号
+            # 先按空白拆分
+            IFS=' ' read -r -a model_nums <<< "$model_choice"
+            if [ "${#model_nums[@]}" -gt 1 ]; then
+                # 多个编号
+                for num in "${model_nums[@]}"; do
+                    if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#AVAILABLE_MODELS[@]}" ]; then
+                        selected_models+=("${AVAILABLE_MODELS[$((num-1))]}")
+                    else
+                        echo -e "${YELLOW}⚠️  忽略无效输入: $num${NC}"
+                    fi
+                done
+                if [ ${#selected_models[@]} -eq 0 ]; then
+                    echo -e "${RED}❌ 未选择任何有效模型${NC}"
+                    read -p "按Enter继续..."
+                    return
+                fi
             else
-                echo -e "${RED}❌ 无效选择${NC}"
-                read -p "按Enter继续..."
-                return
+                # 单个编号
+                if [[ "$model_choice" =~ ^[0-9]+$ ]] && [ "$model_choice" -ge 1 ] && [ "$model_choice" -le "${#AVAILABLE_MODELS[@]}" ]; then
+                    selected_models=("${AVAILABLE_MODELS[$((model_choice-1))]}")
+                else
+                    echo -e "${RED}❌ 无效选择${NC}"
+                    read -p "按Enter继续..."
+                    return
+                fi
             fi
             ;;
     esac

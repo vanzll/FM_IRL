@@ -74,6 +74,18 @@ def add_args(parser):
     )
 
     parser.add_argument("--prefix", default="debug", help="Run identifier")
+    parser.add_argument(
+        "--experiment-name",
+        type=str,
+        default=None,
+        help="Optional W&B run name; if set, overrides the auto-generated prefix",
+    )
+    parser.add_argument(
+        "--group-name",
+        type=str,
+        default=None,
+        help="Optional W&B group name; only set when provided (e.g., via sweep)",
+    )
 
     #############################
     # RL LOOP
@@ -268,3 +280,4 @@ def add_args(parser):
         default=0.95,
         help="gae lambda parameter (default: 0.95)",
     )
+

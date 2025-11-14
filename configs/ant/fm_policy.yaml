@@ -24,6 +24,8 @@ parameters:
     value: fm-bc
   env-name:
     value: AntGoal-v0
+  experiment-name:
+    value: Ant-fp-0.00
   normalize-env:
     value: False
   traj-load-path:

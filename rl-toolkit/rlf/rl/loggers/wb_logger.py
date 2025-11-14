@@ -138,6 +138,8 @@ class WbLogger(BaseLogger):
         # 记录到wandb
         if not histo:
             every_key_vals = {k: get_wb_media(v) for k, v in key_vals.items() if k[0] != '_'}
+            # 让 step 也作为一个显示的度量（同时仍用 step 参数作为横轴）
+            every_key_vals["step"] = int(step_count)
             if not self.skip_create_wb:
                 wandb.log(every_key_vals, step=int(step_count))
             if "_reward_map" in key_vals:
@@ -180,14 +182,20 @@ class WbLogger(BaseLogger):
         else:
             group_id = None
 
-        self.run = wandb.init(
-            project=self.wb_proj_name,
-            name=self.prefix,
-            entity=self.wb_entity,
-            # group=group_id,
-            reinit=True,
-            config=args,
-        )
+        # Prefer explicitly provided experiment name when available
+        run_name = getattr(args, "experiment_name", None) or self.prefix
+
+        init_kwargs = {
+            "project": self.wb_proj_name,
+            "name": run_name,
+            "entity": self.wb_entity,
+            "reinit": True,
+            "config": args,
+        }
+        grp = getattr(args, "group_name", None)
+        if grp is not None and str(grp).strip() != "":
+            init_kwargs["group"] = grp
+        self.run = wandb.init(**init_kwargs)
         self.is_closed = False
         return wandb
 

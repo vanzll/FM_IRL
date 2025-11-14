@@ -8,15 +8,12 @@ class WbOutput(LogOutput):
         wb_proj_name = config_mgr.get_prop('proj_name')
         wb_entity = config_mgr.get_prop('wb_entity')
 
-        if args.prefix.count('-') >= 4:
-            # Remove the seed and random ID info.
-            parts = args.prefix.split('-')
-            group_id = '-'.join([*parts[:2], *parts[4:]])
+        name = getattr(args, 'experiment_name', None) or args.prefix
+        group = getattr(args, 'group_name', None)
+        if group is not None and str(group).strip() != "":
+            wandb.init(project=wb_proj_name, name=name, entity=wb_entity, group=group)
         else:
-            group_id = None
-
-        wandb.init(project=wb_proj_name, name=args.prefix,
-                entity=wb_entity, group=group_id)
+            wandb.init(project=wb_proj_name, name=name, entity=wb_entity)
         wandb.config.update(args)
 
         self.log_dict = {}

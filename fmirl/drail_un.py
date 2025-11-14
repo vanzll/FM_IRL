@@ -25,7 +25,7 @@ import numpy as np
 from rlf.exp_mgr.viz_utils import append_text_to_image
 import math
 
-from drail.ddpm import MLPDiffusionCustomize
+from fmirl.ddpm import MLPDiffusionCustomize
 
 def cosine_beta_schedule(timesteps, s=0.008):
     """

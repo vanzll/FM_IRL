@@ -25,6 +25,8 @@ parameters:
     value: airl
   env-name:
     value: AntGoal-v0
+  experiment-name:
+    value: Ant-airl-0.00
   traj-load-path:
     value: ./expert_datasets/ant_50.pt
   cuda:
